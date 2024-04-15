@@ -1,7 +1,13 @@
 import numpy as np
 import evaluate
 from datasets import load_dataset
-from transformers import AutoTokenizer, DataCollatorWithPadding, TrainingArguments, AutoModelForSequenceClassification, Trainer
+from transformers import (
+    AutoTokenizer,
+    DataCollatorWithPadding,
+    TrainingArguments,
+    AutoModelForSequenceClassification,
+    Trainer,
+)
 
 raw_datasets = load_dataset("glue", "mrpc")
 checkpoint = "bert-base-uncased"
@@ -18,8 +24,7 @@ data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
 training_args = TrainingArguments("test-trainer")
 
-model = AutoModelForSequenceClassification.from_pretrained(
-    checkpoint, num_labels=2)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=2)
 
 trainer = Trainer(
     model,
@@ -27,7 +32,7 @@ trainer = Trainer(
     train_dataset=tokenized_datasets["train"],
     eval_dataset=tokenized_datasets["validation"],
     data_collator=data_collator,
-    tokenizer=tokenizer
+    tokenizer=tokenizer,
 )
 
 # trainer.train()
