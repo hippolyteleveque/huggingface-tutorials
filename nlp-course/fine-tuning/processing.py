@@ -1,5 +1,9 @@
 import torch
-from transformers import AdamW, AutoTokenizer, AutoModelForSequenceClassification, DataCollatorWithPadding
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
+    DataCollatorWithPadding,
+)
 from datasets import load_dataset
 
 # Same as before
@@ -15,7 +19,7 @@ batch = tokenizer(sequences, padding=True, truncation=True, return_tensors="pt")
 # This is new
 batch["labels"] = torch.tensor([1, 1])
 
-# Basic training 
+# Basic training
 # optimizer = AdamW(model.parameters())
 # loss = model(**batch).loss
 # loss.backward()
@@ -29,15 +33,19 @@ tokenized_sentences_2 = tokenizer(raw_datasets["train"]["sentence2"])
 
 inputs = tokenizer("This is the first sentence.", "This is the second one.")
 
+
 def tokenize_function(example):
     return tokenizer(example["sentence1"], example["sentence2"], truncation=True)
+
 
 tokenized_datasets = raw_datasets.map(tokenize_function, batched=True)
 
 data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
 samples_base = tokenized_datasets["train"][:8]
-samples = {k: v for k, v in samples_base.items() if k not in ["idx", "sentence1", "sentence2"]}
+samples = {
+    k: v for k, v in samples_base.items() if k not in ["idx", "sentence1", "sentence2"]
+}
 
 batch = data_collator(samples)
 
