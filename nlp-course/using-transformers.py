@@ -25,7 +25,7 @@ outputs_logits = model(**inputs)
 # Computes the probabilities associated with each classes
 predictions = torch.nn.functional.softmax(outputs_logits.logits, dim=-1)
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     print(f"Tokenized inputs: {inputs}")
     print("\n\n")
     print(f"Hidden state shape: {outputs.last_hidden_state.shape}")
@@ -35,5 +35,3 @@ if __name__ == "__main__":
     print(f"Predictions: {predictions}")
     print("\n\n")
     print(f"Classes: {model.config.id2label}")
-
-
