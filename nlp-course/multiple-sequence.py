@@ -22,17 +22,11 @@ inputs_double_ids = torch.tensor(batched_ids)
 double_logits = model(inputs_double_ids).logits
 
 # Handling inputs of different length
-batched_ids = [
-    [200, 200, 200],
-    [200, 200]
-]
+batched_ids = [[200, 200, 200], [200, 200]]
 
 padding_id = 100
 
-batched_ids = [
-    [200, 200, 200],
-    [200, 200, padding_id]
-]
+batched_ids = [[200, 200, 200], [200, 200, padding_id]]
 
 sequence1_ids = torch.tensor([batched_ids[0]])
 
@@ -53,8 +47,7 @@ attention_mask = [
     [1, 1, 0],
 ]
 
-outputs = model(torch.tensor(batched_ids),
-                attention_mask=torch.tensor(attention_mask))
+outputs = model(torch.tensor(batched_ids), attention_mask=torch.tensor(attention_mask))
 
 if __name__ == "__main__":
     print(f"Result for the first sequence: {seq1_res}")

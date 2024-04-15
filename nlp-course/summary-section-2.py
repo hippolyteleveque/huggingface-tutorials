@@ -1,4 +1,3 @@
-import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # We get the Bert model trained by HF
