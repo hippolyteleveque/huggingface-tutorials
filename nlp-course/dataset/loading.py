@@ -8,4 +8,3 @@ DATA_DIR = path.join(FILE_PATH, "..", "..", "data")
 squad_it_dataset = load_dataset("json", data_dir=DATA_DIR, field="data")
 
 print(squad_it_dataset)
-

@@ -1,7 +1,9 @@
 from datasets import load_dataset
 
-data_files = {"train": "data/drugsComTrain_raw.tsv",
-              "test": "data/drugsComTest_raw.tsv"}
+data_files = {
+    "train": "data/drugsComTrain_raw.tsv",
+    "test": "data/drugsComTest_raw.tsv",
+}
 
 drug_dataset = load_dataset("csv", data_files=data_files, delimiter="\t")
 
@@ -14,6 +16,7 @@ drug_dataset = drug_dataset.rename_column(
 
 def filter_nones(x):
     return x["condition"] is not None
+
 
 # Normalize the condition
 
